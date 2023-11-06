@@ -9,26 +9,25 @@ export default function Home() {
   const [projectValue, setProjectValue] = useState(''); // 使用状态管理输入框的值
   const [count, setCount] = useState(1); // 使用状态管理输入框的值
   const [portValue, setPortValue] = useState(''); // 使用状态管理输入框的值
-
+  //送出
   const handleButtonClick = () => {
-    console.log('Project Value:', projectValue);
-    // 或者，您可以按字段名称来访问特定的数据
     dispatch({ type: 'GETALL',num: state.count+1 });
   };
 
   const handleAddTable = () => {
     setCount(count + 1);
+    dispatch({ type: 'INCREMENT'});
     setTables((prevTables) => [...prevTables, <Table key={prevTables.length} count={count} />]); // 添加一个新的Table组件
   };
 
   const handlePortChange = (e) => {
-    // 更新项目值的状态
     setPortValue(e.target.value);
+    dispatch({ type: 'SET_PORT', port: e.target.value });
   };
 
   const handleProjectChange = (e) => {
-    // 更新项目值的状态
     setProjectValue(e.target.value);
+    dispatch({ type: 'SET_PORJECTNAME',projectname: e.target.value });
   };
 
   return (
