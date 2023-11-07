@@ -16,7 +16,7 @@ export default function Home() {
 
   const handleAddTable = () => {
     setCount(count + 1);
-    dispatch({ type: 'INCREMENT'});
+    dispatch({ type: 'INCREMENT',count:count});
     setTables((prevTables) => [...prevTables, <Table key={prevTables.length} count={count} />]); // 添加一个新的Table组件
   };
 

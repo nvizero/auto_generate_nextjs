@@ -7,7 +7,6 @@ export const useMyContext = () => {
 };
 
 const initialState = {
-  count: 0,
   ProjectName: "",
   Port: 0,
   TableCount: 0,
@@ -17,11 +16,13 @@ const initialState = {
 const reducer = (state, action) => {
   switch (action.type) {
     case 'INCREMENT':
-      return { ...state, count: state.count + 1};
+      return { ...state, TableCount: action.count};
     case 'DECREMENT':
-      return { ...state, count: state.count - 1};
+      return { ...state};
     case 'P_TABLE_NAME':
-      const newTable = { name: action.name, value: action.value };
+      const newTable = { name: action.name, 
+                         value: action.value,
+                         field_count: action.field_count };
       // 创建一个新的Tables数组，包含旧数组中的元素以及新的表格对象
       const newTables = [...state.Tables, newTable];
       return { ...state, Tables: newTables };

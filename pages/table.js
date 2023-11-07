@@ -28,7 +28,10 @@ export default function Table(props) {
       console.log("??11",e.target.value ,id ,inputElement.name, inputElement.value)
       console.log("-22",tablename ,field_count)
       console.log("-33",state.ProjectName ,state.Port)
-      dispatch({ type: 'P_TABLE_NAME',value:inputElement.value, name:inputElement.name});
+      dispatch({  type: 'P_TABLE_NAME',
+                  value:inputElement.value, 
+                  name:inputElement.name,
+                  field_count: field_count});
     }
   };
 
