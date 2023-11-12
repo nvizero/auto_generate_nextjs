@@ -45,6 +45,7 @@ const handleAllData = async (data) => { // Make sure to mark this function as as
         })
       } 
     );
+    await axios.post('/api/generate');
 
     console.log(response);
   } catch (error) {
