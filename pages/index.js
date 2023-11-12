@@ -2,16 +2,16 @@ import Head from 'next/head'
 import { useState } from 'react';
 import Table from './table'
 import { useMyContext } from './context';
-
 export default function Home() {
   const { state, dispatch } = useMyContext();
   const [tables, setTables] = useState([]);
-  const [projectValue, setProjectValue] = useState(''); // 使用状态管理输入框的值
+  const [projectValue, setProjectValue] = useState('testa'); // 使用状态管理输入框的值
   const [count, setCount] = useState(1); // 使用状态管理输入框的值
-  const [portValue, setPortValue] = useState(''); // 使用状态管理输入框的值
+  const [portValue, setPortValue] = useState('1131'); // 使用状态管理输入框的值
+
   //送出
   const handleButtonClick = () => {
-    dispatch({ type: 'GETALL',num: state.count+1 });
+    dispatch({ type: 'POST_ALL'});
   };
 
   const handleAddTable = () => {
@@ -41,12 +41,12 @@ export default function Home() {
           <thead className="thead-dark">
             <tr>
               <td>                   
-                  <button className="btn btn-primary addTable" onClick={handleAddTable}>新增Table</button>
+                  <button className="btn btn-sm btn-primary" onClick={handleButtonClick}>送出</button>
               </td>
               <td>專案名 : <input type="text" name="project" className="project" value={projectValue} onChange={handleProjectChange} /></td>
               <td>port : <input type="text" name="port" className="port" value={portValue} onChange={handlePortChange}/></td>
               <td>                   
-                  <button className="btn btn-primary" onClick={handleButtonClick}>送出</button>
+                  <button className="btn btn-sm btn-primary addTable" onClick={handleAddTable}>新增Table</button>
               </td>
             </tr>
           </thead>

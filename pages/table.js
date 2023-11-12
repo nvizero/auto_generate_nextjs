@@ -13,11 +13,9 @@ export default function Table(props) {
   };
 
   const dispatchTableName = (e,id) => {
-    if (!state.Port || isNaN(state.Port) || state.Port.toString().length !== 4) {
-      alert("專案名與Port必填!Port 要是數字 四位數");
-    }else{
+
       const buttonElement = e.target;
-      buttonElement.disabled = true; // 将按钮变为不可点击
+     // buttonElement.disabled = true; // 将按钮变为不可点击
       
       const addbtn = document.getElementById(`btn-`+id)
       addbtn.disabled = true; // 将 input 变为不可点击
@@ -25,15 +23,13 @@ export default function Table(props) {
       const inputElement = document.getElementById(`tablename`+id);
       inputElement.disabled = true; // 将 input 变为不可点击
       
-      console.log("??11",e.target.value ,id ,inputElement.name, inputElement.value)
-      console.log("-22",tablename ,field_count)
-      console.log("-33",state.ProjectName ,state.Port)
+      // console.log("-22",tablename ,field_count)
+      // console.log("-33",state.ProjectName ,state.Port)
       dispatch({  type: 'P_TABLE_NAME',
-                  value:inputElement.value, 
-                  name:inputElement.name,
+                  value: inputElement.value, 
+                  name: inputElement.name,
                   field_count: field_count});
     }
-  };
 
   const handleAddField = () => {
     setFieldCount(field_count+1)
