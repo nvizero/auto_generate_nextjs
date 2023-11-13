@@ -1,14 +1,22 @@
 import Head from 'next/head'
-import { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Table from './table'
+import Chat from './chat'
 import { useMyContext } from './context';
+
 export default function Home() {
+  useEffect(() => {
+
+    // projectValue('projectname')
+
+  });
+
   const { state, dispatch } = useMyContext();
   const [tables, setTables] = useState([]);
-  const [projectValue, setProjectValue] = useState('testa'); // 使用状态管理输入框的值
+  const [projectValue, setProjectValue] = useState('projectname'); // 使用状态管理输入框的值
   const [count, setCount] = useState(1); // 使用状态管理输入框的值
-  const [portValue, setPortValue] = useState('1131'); // 使用状态管理输入框的值
-
+  const [portValue, setPortValue] = useState('1001'); // 使用状态管理输入框的值
+  
   //送出
   const handleButtonClick = () => {
     dispatch({ type: 'POST_ALL'});
@@ -16,7 +24,6 @@ export default function Home() {
 
   const handleAddTable = () => {
     setCount(count + 1);
-    dispatch({ type: 'INCREMENT',count:count});
     setTables((prevTables) => [...prevTables, <Table key={prevTables.length} count={count} />]); // 添加一个新的Table组件
   };
 
@@ -36,7 +43,7 @@ export default function Home() {
         <title>Create Next App</title>
         <link rel="icon" href="/favicon.ico" />
       </Head>
-        <h3><p>Count: {state.count}</p></h3>
+        <Chat />
         <table className='table'>
           <thead className="thead-dark">
             <tr>

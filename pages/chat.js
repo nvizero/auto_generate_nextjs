@@ -1,33 +1,43 @@
-import Head from 'next/head'
- 
-import {useEffect, useState} from "react";
-
-export async function getServerSideProps() {
-    const initialData = await fetch("http://localhost:8000/handler-initial-data").then(x => x.json());
-    return {props: {data: initialData}}
-}
+import React, { useEffect, useState } from "react";
 
 export default function Chat(props) {
-    const [data, setData] = useState(props.data);
-    useEffect(() => {
-        fetch("http://localhost:8000/handler")
-            .then(x => x.json())
-            .then(x => setData(x));
-    }, [])
-    return (
-        <div  >
-            <Head>
-                <title>OSS Docs</title>
-                <meta name="description" content="Fast like SSR, Powerful like WebSockets"/>
-                <link rel="icon" href="/favicon.ico"/>
-            </Head>
 
-            <main  >
-                <h1  >
-                    {props.title || "Untitled Document"}
-                </h1>
-                <div>Data is: {JSON.stringify(data)}</div>
-            </main>
-        </div>
-    )
+  const [isConnected, setIsConnected] = useState(false);
+  const [data, setData] = useState(props.data);
+  const [ws, setWS] = useState(null);
+
+  useEffect(() => {
+
+    const newWS = new WebSocket('ws://localhost:8080/socket'); // WebSocket server address
+
+    newWS.onopen = () => {
+      setIsConnected(true);
+      setWS(newWS);
+    };
+
+    newWS.onerror = (err) => console.error(err);
+    newWS.onmessage = (msg) => {
+      const receivedData = JSON.parse(msg.data);
+      setData(receivedData);
+    };
+    newWS.onclose = () => {
+      setIsConnected(false);
+      setWS(null);
+    };
+
+    // Cleanup WebSocket connection on component unmount
+    return () => {
+      if (ws) {
+        ws.close();
+      }
+    };
+  }, []); // Empty dependency array to run the effect only once on component mount
+
+  return (
+    <div>
+      {isConnected ? "Connected" : "Not Connected"}
+      <div>reply : { data ? data.reply : "" }</div>
+    </div>
+  );
 }
+
