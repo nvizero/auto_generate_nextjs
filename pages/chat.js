@@ -36,7 +36,7 @@ export default function Chat(props) {
   return (
     <div>
       {isConnected ? "Connected" : "Not Connected"}
-      <div>reply : { data ? data.reply : "" }</div>
+      <div>{ data ? data.reply : "" }</div>
     </div>
   );
 }
