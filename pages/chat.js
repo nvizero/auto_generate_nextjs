@@ -3,7 +3,7 @@ import React, { useEffect, useState } from "react";
 export default function Chat(props) {
 
   const [isConnected, setIsConnected] = useState(false);
-  const [data, setData] = useState(props.data);
+  const [data, setData] = useState([]);
   const [ws, setWS] = useState(null);
 
   useEffect(() => {
@@ -18,7 +18,7 @@ export default function Chat(props) {
     newWS.onerror = (err) => console.error(err);
     newWS.onmessage = (msg) => {
       const receivedData = JSON.parse(msg.data);
-      setData(receivedData);
+      setData(prevData => [...prevData, receivedData]);
     };
     newWS.onclose = () => {
       setIsConnected(false);
@@ -36,7 +36,7 @@ export default function Chat(props) {
   return (
     <div>
       {isConnected ? "Connected" : "Not Connected"}
-      <div>{ data ? data.reply : "" }</div>
+      <div>{ data.map((item, index) => <div key={index}>{item.reply}</div>) }</div>
     </div>
   );
 }

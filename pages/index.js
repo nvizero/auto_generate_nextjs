@@ -43,7 +43,7 @@ export default function Home() {
         <title>Create Next App</title>
         <link rel="icon" href="/favicon.ico" />
       </Head>
-        <Chat />
+         
         <table className='table'>
           <thead className="thead-dark">
             <tr>
@@ -59,12 +59,11 @@ export default function Home() {
           </thead>
         </table>
 
-        <br/>
-
+        <br/>         
         <>
           {tables}
         </>
-        
+        <Chat />
     </div>
   )
 }
