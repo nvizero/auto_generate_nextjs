@@ -7,7 +7,6 @@ export default function Chat(props) {
   const [ws, setWS] = useState(null);
 
   useEffect(() => {
-
     const newWS = new WebSocket('ws://localhost:8080/socket'); // WebSocket server address
 
     newWS.onopen = () => {

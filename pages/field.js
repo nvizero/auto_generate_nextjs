@@ -9,7 +9,7 @@ export default function Field(props) {
           <select name="migration_modelType" className="form-control" >
             <option value="string_text">文字</option>
             <option value="integer_number">數字</option>
-            <option value="text_cheditor">文章</option>
+            <option value="text_ckeditor">文章</option>
           </select>
         </td>
         <td>
